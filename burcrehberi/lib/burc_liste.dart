@@ -1,10 +1,11 @@
+import 'package:burcrehberi/burc_detay.dart';
 import 'package:burcrehberi/utils/strings.dart';
 import 'package:flutter/material.dart';
 
 import 'models/burc.dart';
 
 class BurcListesi extends StatelessWidget {
-  List<Burc> tumBurclar;
+  static List<Burc> tumBurclar;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class BurcListesi extends StatelessWidget {
         title: Text("Burç Rehberi"),
       ),
       body: burcListele(),
+      backgroundColor: Colors.pink.shade50,
     );
   }
 
@@ -52,29 +54,37 @@ class BurcListesi extends StatelessWidget {
 
     return Card(
       elevation: 4,
-      child: ListTile(
-        leading: Image.asset(
-          "images/" + oAnListeyeEklenenBurc.burcKucukResim,
-          width: 64,
-          height: 64,
-        ),
-        title: Text(
-          oAnListeyeEklenenBurc.burcAdi,
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w400,
-            color: Colors.pink.shade500,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          onTap: () => Navigator.pushNamed(context, "/burcDetay/$index"),
+          //onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => BurcDetay())),
+          leading: Image.asset(
+            "images/" + oAnListeyeEklenenBurc.burcKucukResim,
+            width: 64,
+            height: 64,
           ),
-        ),
-        subtitle: Text(
-          oAnListeyeEklenenBurc.burcTarihi,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-            color: Colors.black,
+          title: Text(
+            oAnListeyeEklenenBurc.burcAdi,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w400,
+              color: Colors.pink.shade500,
+            ),
           ),
+          subtitle: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              oAnListeyeEklenenBurc.burcTarihi,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          trailing: Icon(Icons.arrow_forward_ios,color: Colors.pink,),
         ),
-        trailing: Icon(Icons.arrow_forward_ios,color: Colors.pink,),
       ),
     );
   }
